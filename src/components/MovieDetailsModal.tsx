@@ -268,7 +268,7 @@ export function MovieDetailsModal({
             {/* City Quick Filter for Shows */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-2 text-xs font-mono">
               <span className="text-[11px] text-slate-400 font-bold shrink-0">City Filter:</span>
-              {['All', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Delhi NCR', 'Chennai', 'Pune', 'Kolkata', 'Ahmedabad', 'Kochi'].map((c) => (
+              {['All', 'Madhya Pradesh', 'Indore', 'Bhopal', 'Mumbai', 'Bengaluru', 'Hyderabad', 'Delhi NCR', 'Chennai', 'Pune', 'Kolkata'].map((c) => (
                 <button
                   key={c}
                   onClick={() => {
@@ -301,6 +301,9 @@ export function MovieDetailsModal({
                 {theatres
                   .filter((t) => {
                     if (selectedCity === 'All') return true;
+                    if (selectedCity === 'Madhya Pradesh') {
+                      return t.state === 'Madhya Pradesh' || ['Indore', 'Bhopal', 'Gwalior', 'Jabalpur', 'Ujjain'].includes(t.city);
+                    }
                     return t.city.toLowerCase() === selectedCity.toLowerCase();
                   })
                   .map((theatre) => {

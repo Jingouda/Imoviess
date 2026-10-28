@@ -15,6 +15,7 @@ import {
   Zap,
   Radio,
   Gamepad2,
+  MapPin,
 } from 'lucide-react';
 import { NotificationItem } from '../types/cinema';
 
@@ -25,6 +26,7 @@ interface NavbarProps {
   onOpenNotifications: () => void;
   onOpenAuthModal: () => void;
   downloadCount?: number;
+  userAreaName?: string;
 }
 
 export function Navbar({
@@ -34,6 +36,7 @@ export function Navbar({
   onOpenNotifications,
   onOpenAuthModal,
   downloadCount = 0,
+  userAreaName = 'Bandra BKC, Mumbai',
 }: NavbarProps) {
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
@@ -55,29 +58,44 @@ export function Navbar({
     <header className="sticky top-0 z-40 bg-[#070b09]/95 backdrop-blur-md border-b border-emerald-500/30 shadow-lg shadow-emerald-950/20 font-sans">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-4 px-4 sm:px-6 lg:px-8 h-18">
         {/* Zone 1: Brand title with Gamer Radar Tag */}
-        <button
-          onClick={() => handleTabClick('movies')}
-          className="flex items-center gap-3 text-left focus:outline-none group cursor-pointer"
-        >
-          <div className="relative w-9 h-9 rounded-lg bg-emerald-950/80 border border-emerald-500/60 flex items-center justify-center text-emerald-400 font-black shadow-md shadow-emerald-500/20 group-hover:border-emerald-400 transition-colors">
-            <Film className="w-5 h-5 text-emerald-400" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping opacity-75" />
-            <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full" />
-          </div>
-          <div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-display font-black text-xl tracking-wider text-slate-100 group-hover:text-emerald-400 transition-colors">
-                IMOVIES
-              </span>
-              <span className="text-[10px] font-mono tracking-widest text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-500/40">
-                PRO 100
-              </span>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => handleTabClick('movies')}
+            className="flex items-center gap-3 text-left focus:outline-none group cursor-pointer"
+          >
+            <div className="relative w-9 h-9 rounded-lg bg-emerald-950/80 border border-emerald-500/60 flex items-center justify-center text-emerald-400 font-black shadow-md shadow-emerald-500/20 group-hover:border-emerald-400 transition-colors">
+              <Film className="w-5 h-5 text-emerald-400" />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full animate-ping opacity-75" />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-400 rounded-full" />
             </div>
-            <p className="text-[10px] font-mono text-emerald-400/80 hidden sm:block tracking-wider">
-              TACTICAL CINEMA // STREAM VAULT
-            </p>
-          </div>
-        </button>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="font-display font-black text-xl tracking-wider text-slate-100 group-hover:text-emerald-400 transition-colors">
+                  IMOVIES
+                </span>
+                <span className="text-[10px] font-mono tracking-widest text-emerald-400 bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-500/40">
+                  CINEMA
+                </span>
+              </div>
+              <p className="text-[10px] font-mono text-emerald-400/80 hidden sm:block tracking-wider">
+                TACTICAL CINEMA // STREAM VAULT
+              </p>
+            </div>
+          </button>
+
+          {/* Quick Location Radar Pill */}
+          <button
+            onClick={() => handleTabClick('cinemas')}
+            className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/60 hover:bg-emerald-950/60 border border-emerald-500/30 text-emerald-300 text-xs font-mono transition-all group cursor-pointer"
+            title="Click to view Nearby Indian Theatres on Live Map"
+          >
+            <MapPin className="w-3.5 h-3.5 text-emerald-400 group-hover:scale-110 transition-transform" />
+            <span className="font-bold text-white truncate max-w-[160px]">{userAreaName}</span>
+            <span className="text-[10px] text-emerald-400 bg-emerald-950/80 px-1.5 py-0.2 rounded border border-emerald-500/30">
+              Nearby GPS
+            </span>
+          </button>
+        </div>
 
         {/* Zone 2: Navigation Links */}
         <nav className="hidden lg:flex items-center gap-6 text-xs font-mono font-medium tracking-wider text-slate-300">

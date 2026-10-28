@@ -58,7 +58,7 @@ function CinemaApp() {
   const [selectedGenre, setSelectedGenre] = useState('All');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [selectedFormat, setSelectedFormat] = useState('All');
-  const [selectedCity, setSelectedCity] = useState('All India');
+  const [selectedCity, setSelectedCity] = useState('Madhya Pradesh (All MP)');
   const [selectedAvailability, setSelectedAvailability] = useState<'All' | 'stream' | 'theatres' | 'download'>('All');
 
   // Modals & Active Flows
@@ -300,6 +300,7 @@ function CinemaApp() {
         onOpenNotifications={() => setNotifDrawerOpen(true)}
         onOpenAuthModal={() => setAuthModalOpen(true)}
         downloadCount={downloadedMovies.length}
+        userAreaName={selectedCity === 'All India' ? 'Bandra BKC, Mumbai' : `${selectedCity} Radar`}
       />
 
       {/* Main View Area */}
@@ -797,9 +798,9 @@ function CinemaApp() {
       <footer className="border-t border-emerald-500/20 bg-[#060907] py-8 text-xs text-slate-500 font-mono">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <span className="font-display font-black text-slate-200">IMOVIES TACTICAL</span>
+            <span className="font-display font-black text-slate-200">IMOVIES CINEMA</span>
             <span>//</span>
-            <span>100+ CINEMATIC VAULT & ESPORTS RADAR</span>
+            <span>PREMIER THEATRES, RADAR BOOKING & 4K STREAM VAULT</span>
           </div>
           <div className="flex items-center gap-6 text-[11px] text-slate-400">
             <span>IMAX 70MM</span>
